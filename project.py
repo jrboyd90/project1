@@ -6,14 +6,22 @@ from jinja2 import Environment, PackageLoader
 # Retrieve path where HTML lives
 ENV = Environment(
     loader=PackageLoader('project', 'templates')
+     autoescape=select_autoescape(['html', 'xml'])
 )
 
 # Home Page Handler
-class MainHandler(tornado.web.RequestHandler):
 
-    def get(self):
-        template = ENV.get_template('index.html')
-        self.write(template.render())
+class TemplateHandler(tornado.web.RequestHandler):
+  def render_template (self, tpl, context):
+    template = ENV.get_template(tpl)
+    self.write(template.render(**context))
+
+
+class MainHandler(TemplateHandler):
+    def get (self):
+      self.set_header('Cache-Control',
+       'no-store, no-cache, must-revalidate, max-age=0')
+      self.render_template("index.html", {})
 
 # Make the Web Applicaton using Tornado
 def make_app():
@@ -26,7 +34,6 @@ def make_app():
 if __name__ == "__main__":
 
     tornado.log.enable_pretty_logging()
-
     app = make_app()
     app.listen(8888, print('Hosting at 8888'))
     tornado.ioloop.IOLoop.current().start()
