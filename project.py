@@ -1,12 +1,12 @@
 import tornado.log
 import tornado.ioloop
 import tornado.web
-from jinja2 import Environment, PackageLoader
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 # Retrieve path where HTML lives
 ENV = Environment(
-    loader=PackageLoader('project', 'templates')
-     autoescape=select_autoescape(['html', 'xml'])
+    loader=PackageLoader('project', 'templates'),
+    autoescape=select_autoescape(['html', 'xml'])
 )
 
 # Home Page Handler
@@ -23,6 +23,7 @@ class MainHandler(TemplateHandler):
        'no-store, no-cache, must-revalidate, max-age=0')
       self.render_template("index.html", {})
 
+
 # Make the Web Applicaton using Tornado
 def make_app():
   return tornado.web.Application([
@@ -32,7 +33,6 @@ def make_app():
 
 # Main
 if __name__ == "__main__":
-
     tornado.log.enable_pretty_logging()
     app = make_app()
     app.listen(8888, print('Hosting at 8888'))
