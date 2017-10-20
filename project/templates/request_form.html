@@ -1,7 +1,9 @@
+{% extends "base.html" %}
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Help Form</title>
+    <title>{% block title %}Request Form{% endblock %}</title>
     <meta charset="UTF-8">
     <!-- <link href=".css" rel="stylesheet" type="text/css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -9,12 +11,12 @@
 
     </style>
   </head>
-
+  {% block content %}
   <body>
     <div class="container">
       <div class="row">
         <div class="col">
-          
+
         </div>
         <div class="col-6">
           <h1>Request Form</h1>
@@ -119,6 +121,6 @@
 
         </div>
       </div>
-
   </body>
+  {% endblock %}
 </html>
