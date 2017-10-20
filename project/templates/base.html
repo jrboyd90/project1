@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    { % block head % }
+    {% block head %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.11&sensor=false" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/static/style.css";>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css";>
     <script type="text/javascript">
       // check DOM Ready
       $(document).ready(function() {
@@ -69,7 +69,7 @@
         document.body.style.backgroundColor = "rgb(245, 225, 225)";
       }
     </script>
-    { % endblock % }
+    {% endblock %}
   </head>
   <body>
     <div class="container-fluid">
