@@ -1,7 +1,9 @@
 import tornado.log
 import tornado.ioloop
 import tornado.web
+
 from jinja2 import Environment, PackageLoader, select_autoescape
+from models import *
 
 # Retrieve path where HTML lives
 ENV = Environment(
@@ -15,6 +17,12 @@ class TemplateHandler(tornado.web.RequestHandler):
   def render_template (self, tpl, context):
     template = ENV.get_template(tpl)
     self.write(template.render(**context))
+
+def retrieve_api_data():
+
+
+
+
 
 
 class MainHandler(TemplateHandler):
