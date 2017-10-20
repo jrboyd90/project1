@@ -24,10 +24,24 @@ class MainHandler(TemplateHandler):
       self.render_template("index.html", {})
 
 
+class FormHandler(TemplateHandler):
+    def get(self):
+        self.set_header('Cache-Control',
+         'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("form.html", {})
+
+    def post(self):
+        # Process form data
+        self.set_header('Cache-Control',
+         'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("form.html", {})
+
+
 # Make the Web Applicaton using Tornado
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
+    (r"/form", FormHandler),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static'}),
     ], autoreload=True)
 
