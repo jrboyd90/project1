@@ -42,12 +42,19 @@ class RequestFormHandler(TemplateHandler):
 
     def post(self):
         # Process form data
+
+        first_name = self.get_body_argument('first_name')
+        last_name = self.get_body_argument('last_name')
         address = self.get_body_argument('address1')
-        first = self.get_body_argument('first')
-        last = self.get_body_argument('last_name')
         postalcode = self.get_body_argument('postalcode')
         phone = self.get_body_argument('phone')
         email = self.get_body_argument('email')
+        description = self.get_body_argument('description')
+        people = self.get_body_argument('people_needed')
+        truck = self.get_body_argument('truck_needed')
+
+
+
 
 
         GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
@@ -69,10 +76,28 @@ class RequestFormHandler(TemplateHandler):
         geodata['lat'] = result['geometry']['location']['lat']
         geodata['lng'] = result['geometry']['location']['lng']
         geodata['address'] = result['formatted_address']
+        lat = result['geometry']['location']['lat']
+        lng = result['geometry']['location']['lng']
 
         print('{address}. (lat, lng) = ({lat}, {lng})'.format(**geodata))
 
+        row = Request.create(
+            first_name = first_name,
+            last_name = last_name,
+            address1 = address,
+            city = 'houston',
+            state = 'Texas',
+            postalcode = postalcode,
+            latitude = lat,
+            longitude = lng,
+            phone = phone,
+            email = email,
+            description = description,
+            people_needed = people,
+            truck_needed = truck
 
+        )
+        row.save()
 
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
