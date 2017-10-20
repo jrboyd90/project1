@@ -15,14 +15,13 @@ class BaseModel (peewee.Model):
         database = DB
 
 class Request (BaseModel):
-    title = peewee.CharField()
     first_name = peewee.CharField(max_length=30)
     last_name = peewee.CharField(max_length=30)
     address1 = peewee.CharField(max_length=50)
-    address2 = peewee.CharField(max_length=50)
-    address3 = peewee.CharField(max_length=50)
+    address2 = peewee.CharField(max_length=50, null=True)
+    address3 = peewee.CharField(max_length=50, null=True)
     city = peewee.CharField(max_length=30)
-    state = peewee.CharField()
+    state = peewee.CharField(max_length=20)
     postalcode = peewee.CharField()
     latitude = peewee.FloatField()
     longitude = peewee.FloatField()
