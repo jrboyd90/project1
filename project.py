@@ -1,7 +1,9 @@
 import tornado.log
 import tornado.ioloop
 import tornado.web
+
 from jinja2 import Environment, PackageLoader, select_autoescape
+from models import *
 
 # Retrieve path where HTML lives
 ENV = Environment(
@@ -16,6 +18,12 @@ class TemplateHandler(tornado.web.RequestHandler):
     template = ENV.get_template(tpl)
     self.write(template.render(**context))
 
+# def retrieve_api_data():
+
+
+
+
+
 
 class MainHandler(TemplateHandler):
     def get (self):
@@ -24,24 +32,37 @@ class MainHandler(TemplateHandler):
       self.render_template("index.html", {})
 
 
-class FormHandler(TemplateHandler):
+class RequestFormHandler(TemplateHandler):
     def get(self):
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("form.html", {})
+        self.render_template("request_form.html", {})
 
     def post(self):
         # Process form data
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("form.html", {})
+        self.render_template("request_form.html", {})
+
+class VolunteerFormHandler(TemplateHandler):
+    def get(self):
+        self.set_header('Cache-Control',
+         'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("volunteer_form.html", {})
+
+    def post(self):
+        # Process form data
+        self.set_header('Cache-Control',
+         'no-store, no-cache, must-revalidate, max-age=0')
+        self.render_template("volunteer_form.html", {})
 
 
 # Make the Web Applicaton using Tornado
 def make_app():
   return tornado.web.Application([
     (r"/", MainHandler),
-    (r"/form", FormHandler),
+    (r"/request_form", RequestFormHandler),
+    (r"/volunteer_form", VolunteerFormHandler),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static'}),
     ], autoreload=True)
 
