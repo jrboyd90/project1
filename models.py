@@ -29,7 +29,7 @@ class Request (BaseModel):
     phone = peewee.CharField()
     email = peewee.CharField()
     description = peewee.TextField()
-    people_needed = peewee.IntergerField()
+    people_needed = peewee.IntegerField()
     truck_needed = peewee.BooleanField(default=False)
     open_request = peewee.BooleanField(default=True)
     timestamp = peewee.DateTimeField(default=datetime.datetime.utcnow)
@@ -42,7 +42,7 @@ class Volunteer (BaseModel):
     last_name = peewee.CharField(max_length=30)
     phone = peewee.CharField()
     email = peewee.CharField()
-    volunteers = peewee.IntergerField()
+    volunteers = peewee.IntegerField()
     has_truck = peewee.BooleanField(default=False)
     timestamp = peewee.DateTimeField(default=datetime.datetime.utcnow)
 
@@ -50,8 +50,8 @@ class Volunteer (BaseModel):
         return self.name
 
 class Assignment (BaseModel):
-    request_id = peewee.ForeignKeyField(Request)
-    volunteer_id = peewee.ForeignKeyField(Volunteer)
+    request = peewee.ForeignKeyField(Request)
+    volunteer = peewee.ForeignKeyField(Volunteer)
 
     def __str__ (self):
         return self.name
