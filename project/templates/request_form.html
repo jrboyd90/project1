@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Help Form</title>
+    <meta charset="UTF-8">
+    <!-- <link href=".css" rel="stylesheet" type="text/css" /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          
+        </div>
+        <div class="col-6">
+          <h1>Request Form</h1>
+
+          <h2>Contact information</h2>
+          <form class="form" action ="" method ="post">
+
+            <div class="form-group">
+              <legend>Title</legend>
+              <ul>
+                <li>
+                  <label for="title_1">Mr.</label>
+                  <input type="radio" class="form-control" id="title_1" name="title_1" required>
+                </li>
+                <li>
+                  <label for="title_2">Mrs.</label>
+                  <input type="radio" class="form-control" id="title_2" name="title_2" required>
+                </li>
+              </ul>
+            </div>
+                 
+            <div class="form-group">
+              <label for="first_name">First Name:</label>
+              <input type="text" class="form-control" id="first_name" name="first" required>
+            </div>
+
+            <div class="form-group">
+              <label for="last_name">Last Name:</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="address1">Address 1:</label>
+              <input type="text" class="form-control" id="address1" name="address1" placeholder="Address, City, State" required>
+            </div>
+
+            <!-- <div class="form-group">
+              <label for="address2">Address 2:</label>
+              <input type="text" class="form-control" id="address2" name="address2" required>
+            </div>
+
+            <div class="form-group">
+              <label for="address3">Address 3:</label>
+              <input type="text" class="form-control" id="address3" name="address3" required>
+            </div> -->
+
+            <!-- <div class="form-group">
+              <label for="city">City:</label>
+              <input type="text" class="form-control" id="city" name="city" required>
+            </div>
+
+            <div class="form-group">
+              <label for="state">State:</label>
+              <input type="text" class="form-control" id="state" name="state" required>
+            </div> -->
+
+            <div class="form-group">
+              <label for="postalcode">Postal Code:</label>
+              <input type="text" class="form-control" id="postalcode" name="postalcode" required>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <input type="text" class="form-control" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Adress:</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+
+            <h2>Task Description</h2>
+            <div class="form-group">
+              <label for="description">Message:</label>
+              <textarea class="form-control" name='description' type="textarea" id="description" placeholder="Enter Description of Task" maxlength="200" rows="10" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="people_needed">Number of Volunteers Required:</label>
+              <select class="form-control" name="people_needed" id="people_needed">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="truck_needed">Do you require a large vehicle?:</label>
+              <select class="form-control" name="truck_needed" id="truck_needed">
+                <option></option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <div class="col">
+
+        </div>
+      </div>
+
+  </body>
+</html>
