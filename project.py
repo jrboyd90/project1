@@ -1,9 +1,11 @@
 import tornado.log
 import tornado.ioloop
 import tornado.web
+import requests
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 from models import *
+
 
 # Retrieve path where HTML lives
 ENV = Environment(
@@ -40,6 +42,38 @@ class RequestFormHandler(TemplateHandler):
 
     def post(self):
         # Process form data
+        address = self.get_body_argument('address1')
+        first = self.get_body_argument('first')
+        last = self.get_body_argument('last_name')
+        postalcode = self.get_body_argument('postalcode')
+        phone = self.get_body_argument('phone')
+        email = self.get_body_argument('email')
+
+
+        GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+
+        params = {
+            'address': address,
+            'key': 'AIzaSyDICJB-ecPiyM2GtrlleYblXt318jz71So'
+
+        }
+
+        # Do the request and get the response data
+        req = requests.get(GOOGLE_MAPS_API_URL, params=params)
+        res = req.json()
+
+        # Use the first result
+        result = res['results'][0]
+
+        geodata = dict()
+        geodata['lat'] = result['geometry']['location']['lat']
+        geodata['lng'] = result['geometry']['location']['lng']
+        geodata['address'] = result['formatted_address']
+
+        print('{address}. (lat, lng) = ({lat}, {lng})'.format(**geodata))
+
+
+
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
         self.render_template("request_form.html", {})
