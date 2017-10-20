@@ -18,7 +18,7 @@ class TemplateHandler(tornado.web.RequestHandler):
     template = ENV.get_template(tpl)
     self.write(template.render(**context))
 
-def retrieve_api_data():
+# def retrieve_api_data():
 
 
 
