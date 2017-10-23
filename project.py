@@ -32,20 +32,28 @@ class TemplateHandler(tornado.web.RequestHandler):
 class MainHandler(TemplateHandler):
     def get (self):
         mapdata = []
-        for helprequest in Request.select().dicts():
-
-            # get request id for use in querying volunteers assigned to a request
+        for helprequest in Request.select().where(Request.open_request == True).dicts():
+            # get the request id for use in querying the number of volunteers assigned to a request
             helprequest_id = helprequest['id']
-            # query volunteer table summing by request id to get the number of volunteers assigned to the request
 
-            # If volunteers assigned is greater than the number of people needed then the request is at full capacity
-            volunteers_needed = helprequest['people_needed']
-            volunteers_assigned = 3
-            if volunteers_assigned >= volunteers_needed:
+            # query the database to get the number of volunteers assigned to a request
+            sum_volunteers = DB.execute_sql('SELECT SUM(volunteers) FROM  Assignment JOIN Volunteer ON Assignment.volunteer_id = volunteer.id WHERE request_id = %s', (helprequest_id,)).fetchone()
+
+            # initialize the number of volunteers based on the query results
+            if sum_volunteers[0] is not None:
+                volunteers_assigned = sum_volunteers[0]
+            else:
+                volunteers_assigned = 0
+
+            # If volunteers assigned is greater than or equal to the number of people needed then the request is at full capacity
+            people_needed = helprequest['people_needed']
+
+            if volunteers_assigned >= people_needed:
                 helprequest['full_capacity'] = True
             else:
                 helprequest['full_capacity'] = False
 
+            # load the array with data from each row in the Request table for use in the UI
             mapdata.append(helprequest)
 
         print(str(mapdata))
