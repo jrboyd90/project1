@@ -15,7 +15,13 @@
 <div class="row d-flex justify-content-center">
   <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 500px; margin-top: 1em;"></div>
 </div>
+var dataArray = [];
 
+{% for item in mapdata %}
+  dataArray.append({{ item }});
+{% endfor %}
+
+console.log(dataArray[1]);
 <script>
   function initMap() {
     var houston = {lat: 29.7604267, lng: -95.3698028};
@@ -23,11 +29,50 @@
       zoom: 10,
       center: houston
     });
-    var marker = new google.maps.Marker({
-      position: houston,
-      map: map,
-      animation: google.maps.Animation.DROP
-    });
+
+    var markers = [
+      {
+        coords:{lat: 29.676111,lng: -94.965833},
+        content:'<h1>heyhey</h1>'
+      },
+      {
+        coords:{lat: 29.7529,lng: -95.3391},
+        content:'<h1>sup</h1>'
+      },
+      {
+        coords:{lat: 29.8258,lng: -95.572}
+      }
+    ];
+
+    // Loop through markers
+    for(var i = 0;i < markers.length;i++){
+      // Add marker
+      addMarker(markers[i]);
+    }
+
+    // Add Marker Function
+    function addMarker(props){
+      var marker = new google.maps.Marker({
+        position:props.coords,
+        map:map,
+
+
+
+        //icon:props.iconImage
+      });
+
+      // Check content
+      if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+          content:props.content
+        });
+
+        marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+        });
+      }
+    }
+
   }
 </script>
 <script async defer
