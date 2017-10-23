@@ -1,6 +1,9 @@
 body {
     font-family: "Lato", sans-serif;
     transition: background-color 1.5s;
+    /*background-color: #000;*/
+    background: url('https://images6.alphacoders.com/330/330366.jpg') no-repeat center top;
+    background-size: cover;
 }
 
 .sidenav {
@@ -14,6 +17,7 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+
 }
 
 .sidenav a {

@@ -147,6 +147,21 @@ class VolunteerFormHandler(TemplateHandler):
 
     def post(self):
         # Process form data
+        form_first_name = self.get_body_argument('first_name')
+        form_last_name = self.get_body_argument('last_name')
+        form_phone = self.get_body_argument('phone')
+        form_email = self.get_body_argument('email')
+        form_volunteers = self.get_body_argument('volunteers')
+        form_has_truck = self.get_body_argument('has_truck')
+        row = Volunteer.create(
+            first_name = form_first_name,
+            last_name = form_last_name,
+            phone = form_phone,
+            email = form_email,
+            volunteers = form_volunteers,
+            has_truck = form_has_truck
+        )
+        row.save()
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
         self.render_template("volunteer_form.html", {})
