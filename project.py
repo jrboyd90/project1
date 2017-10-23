@@ -64,6 +64,7 @@ class RequestFormHandler(TemplateHandler):
             'key': 'AIzaSyDICJB-ecPiyM2GtrlleYblXt318jz71So'
 
         }
+        
 
         # Do the request and get the response data
         req = requests.get(GOOGLE_MAPS_API_URL, params=params)
