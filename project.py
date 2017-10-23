@@ -31,9 +31,30 @@ class TemplateHandler(tornado.web.RequestHandler):
 
 class MainHandler(TemplateHandler):
     def get (self):
-      self.set_header('Cache-Control',
-       'no-store, no-cache, must-revalidate, max-age=0')
-      self.render_template("index.html", {})
+        mapdata = []
+        for helprequest in Request.select().dicts():
+
+            # get request id for use in querying volunteers assigned to a request
+            helprequest_id = helprequest['id']
+            # query volunteer table summing by request id to get the number of volunteers assigned to the request
+
+            # If volunteers assigned is greater than the number of people needed then the request is at full capacity
+            volunteers_needed = helprequest['people_needed']
+            volunteers_assigned = 3
+            if volunteers_assigned >= volunteers_needed:
+                helprequest['full_capacity'] = True
+            else:
+                helprequest['full_capacity'] = False
+
+            mapdata.append(helprequest)
+
+        print(str(mapdata))
+        self.set_header('Cache-Control',
+        'no-store, no-cache, must-revalidate, max-age=0')
+        template = ENV.get_template('index.html')
+        self.write(template.render({'mapdata':mapdata}))
+
+        # self.render_template("index.html", {})
 
 
 class RequestFormHandler(TemplateHandler):
