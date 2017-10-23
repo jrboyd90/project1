@@ -1,3 +1,5 @@
+import os
+
 import tornado.log
 import tornado.ioloop
 import tornado.web
@@ -6,7 +8,7 @@ import requests
 from jinja2 import Environment, PackageLoader, select_autoescape
 from models import *
 
-
+PORT = int(os.environ.get('PORT', '8888'))
 # Retrieve path where HTML lives
 ENV = Environment(
     loader=PackageLoader('project', 'templates'),
@@ -64,7 +66,7 @@ class RequestFormHandler(TemplateHandler):
             'key': 'AIzaSyDICJB-ecPiyM2GtrlleYblXt318jz71So'
 
         }
-        
+
 
         # Do the request and get the response data
         req = requests.get(GOOGLE_MAPS_API_URL, params=params)
@@ -130,5 +132,5 @@ def make_app():
 if __name__ == "__main__":
     tornado.log.enable_pretty_logging()
     app = make_app()
-    app.listen(8888, print('Hosting at 8888'))
+    app.listen(PORT, print('Hosting at 8888'))
     tornado.ioloop.IOLoop.current().start()
