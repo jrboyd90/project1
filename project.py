@@ -46,12 +46,16 @@ class RequestFormHandler(TemplateHandler):
         first_name = self.get_body_argument('first_name')
         last_name = self.get_body_argument('last_name')
         address = self.get_body_argument('address1')
+        city = self.get_body_argument('city')
+        state = self.get_body_argument('state')
         postalcode = self.get_body_argument('postalcode')
         phone = self.get_body_argument('phone')
         email = self.get_body_argument('email')
         description = self.get_body_argument('description')
         people = self.get_body_argument('people_needed')
         truck = self.get_body_argument('truck_needed')
+
+        address1 = (address + ', ' + city + ', ' + state)
 
 
 
@@ -60,11 +64,11 @@ class RequestFormHandler(TemplateHandler):
         GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 
         params = {
-            'address': address,
+            'address': address1,
             'key': 'AIzaSyDICJB-ecPiyM2GtrlleYblXt318jz71So'
 
         }
-        
+
 
         # Do the request and get the response data
         req = requests.get(GOOGLE_MAPS_API_URL, params=params)
@@ -86,8 +90,8 @@ class RequestFormHandler(TemplateHandler):
             first_name = first_name,
             last_name = last_name,
             address1 = address,
-            city = 'houston',
-            state = 'Texas',
+            city = city,
+            state = state,
             postalcode = postalcode,
             latitude = lat,
             longitude = lng,
