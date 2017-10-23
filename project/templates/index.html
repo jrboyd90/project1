@@ -11,24 +11,26 @@
 </style>
 {% endblock %}
 
-
 {% block content %}
-<h3>My Google Maps Demo</h3>
-<div id="map"></div>
+<div class="row d-flex justify-content-center">
+  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 500px; margin-top: 1em;"></div>
+</div>
+
 <script>
   function initMap() {
-    var uluru = {lat: -25.363, lng: 131.044};
+    var houston = {lat: 29.7604267, lng: -95.3698028};
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 4,
-      center: uluru
+      zoom: 10,
+      center: houston
     });
     var marker = new google.maps.Marker({
-      position: uluru,
-      map: map
+      position: houston,
+      map: map,
+      animation: google.maps.Animation.DROP
     });
   }
 </script>
 <script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2iL6ewJ-ZbMXwS2nTEsGXHZbzOOCkFWo&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2iL6ewJ-ZbMXwS2nTEsGXHZbzOOCkFWo&callback=initMap">
 </script>
 {% endblock %}
