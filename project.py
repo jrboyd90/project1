@@ -39,19 +39,25 @@ class MainHandler(TemplateHandler):
             # query the database to get the number of volunteers assigned to a request
             sum_volunteers = DB.execute_sql('SELECT SUM(volunteers) FROM  Assignment JOIN Volunteer ON Assignment.volunteer_id = volunteer.id WHERE request_id = %s', (helprequest_id,)).fetchone()
 
-            # initialize the number of volunteers based on the query results
+            # set the number of volunteers assigned based on the query results
             if sum_volunteers[0] is not None:
                 volunteers_assigned = sum_volunteers[0]
             else:
                 volunteers_assigned = 0
 
-            # If volunteers assigned is greater than or equal to the number of people needed then the request is at full capacity
+            # calculate the number of people needed based on the request and the number of volunteers assigned
             people_needed = helprequest['people_needed']
+            people_needed = people_needed - volunteers_assigned
 
-            if volunteers_assigned >= people_needed:
+            # If the number of people needed is less than or equal to zero then we're at full capacity
+            if people_needed <= 0:
+                people_needed = 0
                 helprequest['full_capacity'] = True
             else:
                 helprequest['full_capacity'] = False
+
+            # update the dictionary with number of people needed
+            helprequest['people_needed'] = people_needed
 
             # load the array with data from each row in the Request table for use in the UI
             mapdata.append(helprequest)
