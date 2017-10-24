@@ -3,6 +3,7 @@ body {
     transition: background-color 1.5s;
     background: url('https://images6.alphacoders.com/330/330366.jpg') no-repeat center top;
     background-size: cover;
+    color: white;
 }
 
 .sidenav {
@@ -50,7 +51,7 @@ body {
   .sidenav a {font-size: 18px;}
 }
 
-/*Submit button stuff below*/
+/*Submit button stuff*/
 
 main {
   height: 100vh;

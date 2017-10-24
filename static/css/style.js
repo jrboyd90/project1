@@ -51,10 +51,43 @@ basicTimeline
     easing: "easeInOutSine"
   });
 
+  // function submitForm() {
+  //   console.log('submitting');
+  //   var form = $("#form").get(0);
+  //
+  //   if (form.checkValidity()) {
+  //     form.submit();
+  //   }
+  //   else {
+  //     console.log('not valid');
+  //     document.getElementById('form').reset();
+  //     document.querySelector('.button').reset();
+  //   }
+  // }
+
 $(".button").click(function() {
-  basicTimeline.play();
+  var form = $("#form").get(0);
+
+  if (form.checkValidity()) {
+    basicTimeline.play();
+    form.submit();
+
+  } else {
+    swal(
+  'Oops...',
+  'Something went wrong!',
+  'error'
+)};
+
 });
 
 $(".text").click(function() {
-  basicTimeline.play();
+  var form = $("#form").get(0);
+
+  if (form.checkValidity()) {
+    basicTimeline.play();
+    form.submit();
+  } else {
+  
+  }
 });
