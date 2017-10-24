@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="row d-flex justify-content-center">
-  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 500px; margin-top: 1em;"></div>
+  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 500px;"></div>
 </div>
 <script>
 
@@ -24,7 +24,7 @@
   function initMap() {
     var houston = {lat: 29.7604267, lng: -95.3698028};
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: 9,
       center: houston
     });
 
@@ -34,7 +34,7 @@
           coords: {
             lat: {{ item.latitude }},
             lng: {{ item.longitude }} },
-          content: '{{ item.description }}'
+          content: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>'
       };
 
 
@@ -46,11 +46,8 @@
         var marker = new google.maps.Marker({
           position:props.coords,
           map:map,
-          animation: google.maps.Animation.Drop
-
-
-
-          //icon:props.iconImage
+          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', //check if P.I.N event is open, else set default color
+          animation: google.maps.Animation.DROP
         });
 
         // Check content
