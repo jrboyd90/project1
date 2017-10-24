@@ -1,9 +1,9 @@
 import os
-
 import tornado.log
 import tornado.ioloop
 import tornado.web
 import requests
+
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 from models import *
@@ -139,7 +139,6 @@ class RequestFormHandler(TemplateHandler):
             truck_needed = truck
 
         )
-        row.save()
 
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
@@ -153,13 +152,14 @@ class VolunteerFormHandler(TemplateHandler):
 
     def post(self):
         # Process form data
+        form_request_id = self.get_body_argument('id')
         form_first_name = self.get_body_argument('first_name')
         form_last_name = self.get_body_argument('last_name')
         form_phone = self.get_body_argument('phone')
         form_email = self.get_body_argument('email')
         form_volunteers = self.get_body_argument('volunteers')
         form_has_truck = self.get_body_argument('has_truck')
-        row = Volunteer.create(
+        v = Volunteer.create(
             first_name = form_first_name,
             last_name = form_last_name,
             phone = form_phone,
@@ -167,7 +167,11 @@ class VolunteerFormHandler(TemplateHandler):
             volunteers = form_volunteers,
             has_truck = form_has_truck
         )
-        row.save()
+        a = Assignment.create(
+            # Developer note - regarding the line of code below:  When referencing an object that was used to insert a row into a table (in this case 'v' was used to insert a row into the Volunteer table) it automatically knows to use the id field from that object when assigning it to another variable (in this case variable 'volunteer' will contain the value of the id field for the row that was written to the Volunteer table).  Actually, the object 'v' will contain ALL fields and their corresponding value.  An equivalent to the code below would have been 'volunteer = v.id' - this would have worked just as well.  Also, you can reference all fields this way (e.g. v.first_name, v.last_name, etc.)
+            volunteer = v
+            request = form_request_id
+        )
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
         self.render_template("volunteer_form.html", {})
