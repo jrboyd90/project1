@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="row d-flex justify-content-center">
-  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 500px;"></div>
+  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 700px;"></div>
 </div>
 <script>
 
@@ -35,9 +35,43 @@
             lat: {{ item.latitude }},
             lng: {{ item.longitude }} },
           content: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>' +
-          '<form action="/volunteer_form" method="post">' +
-          '<input type="hidden" name="id" value="{{ item.id }}" />' +
-          '<input type="submit" name="submit" value="I would like to volunteer" >'    +
+          '<form class="form" action ="/volunteer_form" method ="post">' +                           
+            '<div class="form-group">' +
+              '<label for="first_name">Name:</label>' +
+              '<input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label for="last_name">Last Name:</label>' +
+              '<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label for="phone">Phone:</label>' +
+              '<input type="text" class="form-control" id="phone" name="phone" placeholder="###-###-####" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label for="email">Email Address:</label>' +
+              '<input type="email" class="form-control" id="email" name="email" placeholder="yourname@email.com" required>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label for="volunteers">Number of Volunteers:</label>' +
+              '<select class="form-control" class="volunteers" id="volunteers" name="volunteers">' +
+                '<option>1</option>' +
+                '<option>2</option>' +
+                '<option>3</option>' +
+                '<option>4</option>' +
+                '<option>5</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="form-group">' +
+              '<label for="has_truck">Do you have a large vehicle?:</label>' +
+              '<select class="form-control" class="has_truck" id="has_truck" name="has_truck">' +
+                '<option></option>' +
+                '<option>Yes</option>' +
+                '<option>No</option>' +
+              '</select>' +
+            '</div>' +
+          '<input type="hidden" name="id" value="{{ item.id }}"/>'
+          '<button type="submit" class="btn btn-primary btn-lg btn-block">I want to volunteer</button>' +
           '</form>'
       };
 
