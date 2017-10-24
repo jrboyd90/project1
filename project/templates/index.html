@@ -84,6 +84,9 @@
 
       // Add Marker Function
       function addMarker(props){
+
+
+
         var marker = new google.maps.Marker({
           position:props.coords,
           map:map,
@@ -97,9 +100,20 @@
             content:props.content
           });
 
-          marker.addListener('click', function(){
+
+          google.maps.event.addListener(marker, 'dblclick', function(){
             infoWindow.open(map, marker);
           });
+
+          google.maps.event.addListener(marker, 'click', function(){
+            infoWindow.close(map, marker);
+          });
+
+          google.maps.event.addListener(map, 'click', function(){
+            infoWindow.close(map, marker);
+          });
+
+
         }
       }
     {% endfor %}
