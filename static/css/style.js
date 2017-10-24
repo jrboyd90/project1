@@ -75,7 +75,11 @@ $(".button").click(function() {
   } else {
     swal(
   'Oops... Something went wrong!',
+<<<<<<< HEAD
   'Please re-check your form',
+=======
+  '',
+>>>>>>> master
   'error'
 )};
 
