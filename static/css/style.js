@@ -74,8 +74,8 @@ $(".button").click(function() {
 
   } else {
     swal(
-  'Oops...',
-  'Something went wrong!',
+  'Oops... Something went wrong!',
+  'Please re-check your form',
   'error'
 )};
 
@@ -88,6 +88,6 @@ $(".text").click(function() {
     basicTimeline.play();
     form.submit();
   } else {
-  
+
   }
 });
