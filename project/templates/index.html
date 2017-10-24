@@ -34,6 +34,7 @@
           coords: {
             lat: {{ item.latitude }},
             lng: {{ item.longitude }} },
+          volunteers: {{ item.people_needed }},
           content: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>' +
           '<form class="form" action ="/volunteer_form" method ="post">' +                           
             '<div class="form-group">' +
@@ -70,7 +71,7 @@
                 '<option>No</option>' +
               '</select>' +
             '</div>' +
-          '<input type="hidden" name="id" value="{{ item.id }}"/>'
+          '<input type="hidden" name="id" value="{{ item.id }}"/>' +
           '<button type="submit" class="btn btn-primary btn-lg btn-block">I want to volunteer</button>' +
           '</form>'
       };
@@ -79,13 +80,13 @@
       // Loop through markers
       addMarker(markers);
 
-      // Set marker color
-      var iconImage = function() {
-        if ({{ item.people_needed }}  == 0){
-          return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+      //Set marker color
+      function iconImage() {
+        if (markers.volunteers == 0){
+          return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         }
         else {
-          return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+          return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
         }
       };
 
@@ -94,7 +95,7 @@
         var marker = new google.maps.Marker({
           position:props.coords,
           map:map,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png', //check if P.I.N event is open, else set default color
+          icon: iconImage(),
           animation: google.maps.Animation.DROP
         });
 
