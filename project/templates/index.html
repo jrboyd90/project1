@@ -79,6 +79,16 @@
       // Loop through markers
       addMarker(markers);
 
+      // Set marker color
+      var iconImage = function() {
+        if ({{ item.people_needed }}  == 0){
+          return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+        }
+        else {
+          return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+        }
+      };
+
       // Add Marker Function
       function addMarker(props){
         var marker = new google.maps.Marker({
