@@ -15,12 +15,25 @@
 <div class="row d-flex justify-content-center">
   <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 700px;"></div>
 </div>
+
+
+
 <script>
 
+{% for items in mapdata %}
+  var name = [
+    {
+      first: {{items.first_name}},
+      last: {{items.last_name}}
+    }]
+{% endfor %}
+
+</script>
 
 
 
 
+<script>
   function initMap() {
     var houston = {lat: 29.7604267, lng: -95.3698028};
     var map = new google.maps.Map(document.getElementById('map'), {
