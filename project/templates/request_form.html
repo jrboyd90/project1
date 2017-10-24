@@ -19,10 +19,10 @@
 
         </div>
         <div class="col-6">
-          <h1>Request Form</h1>
+          <h1 style="text-align: center">Request Form</h1>
 
-          <h2>Contact information</h2>
-          <form class="form" action ="" method ="post">
+          <h2 style="text-align: center">Contact information</h2>
+          <form class="form" action ="" method ="post" id="form">
 
             <div class="form-group">
               <label for="first_name">First Name:</label>
@@ -100,7 +100,21 @@
                 <option>No</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+            <div class = "form-row">
+              <div class= "form-group" style="margin: 480px auto">
+              <main>
+              <div class="button">
+                <div class="text">Submit</div>
+              </div>
+              <div class="progress-bar"></div>
+              <svg x="0px" y="0px"
+            	 viewBox="0 0 25 30" style="enable-background:new 0 0 25 30;">
+                <path class="check" class="st0" d="M2,19.2C5.9,23.6,9.4,28,9.4,28L23,2"/>
+              </svg>
+              <input type='submit' style="visibility: hidden" id="submitButton">
+            </main>
+          </div>
+          </div>
           </form>
         </div>
         <div class="col">
