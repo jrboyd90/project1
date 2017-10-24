@@ -74,8 +74,8 @@ $(".button").click(function() {
 
   } else {
     swal(
-  'Oops...',
-  'Something went wrong!',
+  'Oops... Something went wrong!',
+  '',
   'error'
 )};
 
