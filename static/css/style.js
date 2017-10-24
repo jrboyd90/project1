@@ -78,7 +78,6 @@ $(".button").click(function() {
   'Please re-check your form',
   'error'
 )};
-
 });
 
 $(".text").click(function() {

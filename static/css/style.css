@@ -1,8 +1,7 @@
 body {
     font-family: "Lato", sans-serif;
     transition: background-color 1.5s;
-    background: url('https://images6.alphacoders.com/330/330366.jpg') no-repeat center top;
-    background-size: cover;
+    background: url('https://images6.alphacoders.com/330/330366.jpg') no-repeat center top ;
     color: white;
 }
 
