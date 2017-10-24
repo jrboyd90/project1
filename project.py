@@ -169,7 +169,7 @@ class VolunteerFormHandler(TemplateHandler):
         )
         a = Assignment.create(
             # Developer note - regarding the line of code below:  When referencing an object that was used to insert a row into a table (in this case 'v' was used to insert a row into the Volunteer table) it automatically knows to use the id field from that object when assigning it to another variable (in this case variable 'volunteer' will contain the value of the id field for the row that was written to the Volunteer table).  Actually, the object 'v' will contain ALL fields and their corresponding value.  An equivalent to the code below would have been 'volunteer = v.id' - this would have worked just as well.  Also, you can reference all fields this way (e.g. v.first_name, v.last_name, etc.)
-            volunteer = v
+            volunteer = v,
             request = form_request_id
         )
         self.set_header('Cache-Control',
