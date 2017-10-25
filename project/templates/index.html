@@ -38,10 +38,15 @@
             lat: {{ item.latitude }},
             lng: {{ item.longitude }} },
           volunteers: {{ item.people_needed }},
-          content1: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>',
+          content1: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }} {{ item.last_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>',
           content: '<div style="margin-right: 15px;">' +
-            '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}<br><a href="/request_form">Event Status</a></p>' +
-            '<form class="form" action ="/volunteer_form" method ="post" style=color: black>' +                           
+            '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }} {{ item.last_name }} <br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}' +
+            '<form class="form" action ="/status" method ="post" style=color: black>' +
+            '<input type="hidden" name="id" value="{{ item.id }}"/>' +
+            '<button type="submit" class="btn btn-primary btn-sm btn-block">Status</button>' +
+            '</form>' +
+            '<br />' +
+            '<form class="form" action ="/vstatus" method ="post" style=color: black>' +                           
             '<div class="form-group">' +
               '<label for="first_name">Name:</label>' +
               '<input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required>' +
@@ -89,8 +94,18 @@
       //Set marker color
       function iconImage() {
         if (markers.volunteers == 0){
+<<<<<<< HEAD
           markers.content = '<h6>No volunteers needed at the moment!</h6>'
           return 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
+=======
+          markers.content = '<h6>No volunteers needed at the moment!</h6>' +
+          '<form class="form" action ="/status" method ="post" style=color: black>' +
+          '<input type="hidden" name="id" value="{{ item.id }}"/>' +
+          '<button type="submit" class="btn btn-primary btn-sm btn-block">Status</button>' +
+          '</form>' +
+          '<br />'
+          return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+>>>>>>> edfb38630d77c91864114ae4a6bf0679871593e6
         }
         else {
           return 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
