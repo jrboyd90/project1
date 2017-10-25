@@ -94,10 +94,7 @@
       //Set marker color
       function iconImage() {
         if (markers.volunteers == 0){
-<<<<<<< HEAD
-          markers.content = '<h6>No volunteers needed at the moment!</h6>'
-          return 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
-=======
+
           markers.content = '<h6>No volunteers needed at the moment!</h6>' +
           '<form class="form" action ="/status" method ="post" style=color: black>' +
           '<input type="hidden" name="id" value="{{ item.id }}"/>' +
@@ -105,7 +102,7 @@
           '</form>' +
           '<br />'
           return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
->>>>>>> edfb38630d77c91864114ae4a6bf0679871593e6
+
         }
         else {
           return 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
