@@ -66,14 +66,3 @@ $(".button").click(function() {
   'error'
 )};
 });
-
-$(".text").click(function() {
-  var form = $("#form").get(0);
-
-  if (form.checkValidity()) {
-    basicTimeline.play();
-    setTimeout(function(){form.submit();}, 5000)
-  } else {
-
-  }
-});

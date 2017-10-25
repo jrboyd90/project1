@@ -63,8 +63,11 @@ body {
 /*Submit button stuff*/
 
 .buttoncontainer {
-  margin-top: 1600px;
+  /*margin-top: 1600px;*/
   /*float:right*/
+  position: relative;
+  margin: 50px 0;
+  width: 100%;
 }
 
 .button {
@@ -78,21 +81,17 @@ body {
   transform: translateY(-50%);
   left: 0;
   right: 0;
-  margin: 0 auto;
+  margin: 14px auto;
   cursor: pointer;
   border-radius: 4px;
-}
-
-.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font: bold 1.25rem/1 poppins;
   color: #71DFBE;
-  position: absolute;
-  top: 50%;
-  /*bottom: 5%;*/
-  transform: translateY(-52%);
-  left: 0;
-  right: 0;
+  margin-bottom: 48px;
 }
+
 
 .progress-bar {
   position: absolute;
