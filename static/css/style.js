@@ -61,7 +61,7 @@ function submit_form () {
 
   if (form.checkValidity()) {
     basicTimeline.play();
-    setTimeout(function(){form.submit();}, 5000)
+    setTimeout(function(){form.submit();}, 6000)
 
   } else {
     swal(
