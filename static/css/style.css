@@ -4,6 +4,7 @@ body {
     background-size: cover;
     transition: background-color 1.5s;
     color: white;
+    margin-top: 100px;
 }
 
 @media(min-width: 768px) {
@@ -63,8 +64,6 @@ body {
 /*Submit button stuff*/
 
 .buttoncontainer {
-  /*margin-top: 1600px;*/
-  /*float:right*/
   position: relative;
   margin: 50px 0;
   padding: 30px;
