@@ -29,7 +29,7 @@
 
   <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark width: 100%">
-      <a class="navbar-brand" href="#">Volunteer Service App</a>
+      <a class="navbar-brand" href="/">Helpr</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -41,13 +41,7 @@
           <li class="nav-item hvr-grow-shadow hvr-fade">
             <a class="nav-link" href="/request_form">Request Form</a>
           </li>
-          <li class="nav-item hvr-grow-shadow hvr-fade">
-            <a class="nav-link" href="/volunteer_form">Volunteer Form</a>
-          </li>
-          <li class="nav-item hvr-grow-shadow hvr-fade">
-            <a class="nav-link" href="/status">Status Page</a>
-          </li>
-          <li class="nav-item dropdown hvr-grow-shadow hvr-fade">
+          <!-- <li class="nav-item dropdown hvr-grow-shadow hvr-fade">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               More Links
             </a>
@@ -56,24 +50,11 @@
               <a class="dropdown-item" href="#">Change These</a>
               <a class="dropdown-item" href="#">To Whatever</a>
             </div>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
 
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-      <a href="#">About</a>
-      <a href="/request_form">Request Form</a>
-      <a href="/volunteer_form">Volunteers</a>
-      <a href="/status">Status</a>
-    </div>
-
-    <div id="main">
-      <!-- <h2>Sidenav Push Example</h2>
-      <p>Click on the element below to open the side navigation menu, and push this content to the right. Notice that we add a black see-through background-color to body when the sidenav is opened.</p> -->
-      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
-    </div>
     {% block content %}
     <h1></h1>
     {% endblock %}
