@@ -27,9 +27,9 @@
             lat: {{ item.latitude }},
             lng: {{ item.longitude }} },
           volunteers: {{ item.people_needed }},
-          content1: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>',
+          content1: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>',
           content: '<div style="margin-right: 15px;">' +
-          '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>' +
+          '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>' +
           '<form class="form" action ="/volunteer_form" method ="post" style=color: black>' +                           
             '<div class="form-group">' +
               '<label for="first_name">Name:</label>' +
@@ -78,6 +78,7 @@
       //Set marker color
       function iconImage() {
         if (markers.volunteers == 0){
+          markers.content = markers.content1;
           return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         }
         else {
