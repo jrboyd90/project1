@@ -7,8 +7,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="row d-flex justify-content-center">
-  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 800px; height: 500px; color: black";></div>
+<div class="form-group" style="text-align:center">
+<h2>How To Use Map:</h2>
+</div>
+<div class="form-group" style="display:flex; justify-content:center">
+  <ul>
+    <li>If you are looking for help, please click on "Request Help" at the top right of the website</li><br>
+    <li>After filling out the form on the Request help page, a personal pin will be created</li><br>
+    <li>Someone can now click on your pin and if they choose, can volunteer to help you!</li><br>
+</ul>
+</div>
+</div>
+<div class="row d-flex justify-content-center" style="margin-bottom:150px;">
+  <div class="col-lg-8 col-md-8 col-sm-8" id="map" style="width: 80%; height: 500px; color: black";></div>
 </div>
 <script>
 
@@ -79,10 +90,10 @@
       function iconImage() {
         if (markers.volunteers == 0){
           markers.content = '<h6>No volunteers needed at the moment!</h6>'
-          return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+          return 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
         }
         else {
-          return 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+          return 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
         }
       };
 
