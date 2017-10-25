@@ -159,7 +159,10 @@ class RequestFormHandler(TemplateHandler):
 
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("status.html", {})
+
+        template = ENV.get_template('status.html')
+        self.write(template.render({'requestdata': requestdata, 'volunteerdata': volunteerdata}))
+
 
 
 class VolunteerFormHandler(TemplateHandler):
@@ -199,7 +202,9 @@ class VolunteerFormHandler(TemplateHandler):
 
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("status.html", {})
+
+        template = ENV.get_template('status.html')
+        self.write(template.render({'requestdata': requestdata, 'volunteerdata': volunteerdata}))
 
 
 # Make the Web Applicaton using Tornado
@@ -208,6 +213,8 @@ def make_app():
     (r"/", MainHandler),
     (r"/request_form", RequestFormHandler),
     (r"/volunteer_form", VolunteerFormHandler),
+    (r"/rstatus", RequestFormHandler),
+    (r"/vstatus", VolunteerFormHandler),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static'}),
     ], autoreload=True)
 

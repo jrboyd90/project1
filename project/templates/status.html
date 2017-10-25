@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+
+{% block title %}Status{% endblock %}
+{% block content %}
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+
+        </div>
+          <div class="col-md-8 text-left">
+          <h1 style="text-align: center">Request Information</h1>
+
+          {% for item in requestdata %}
+          <h3><b>Name: </b>{{ item.first_name }} {{ item.last_name }}</h3>
+          <h3><b>Address: </b>{{ item.address1 }}</h3>
+          <h3><b>City: </b>{{ item.city }}</h3>
+          <h3><b>State: </b>{{ item.state }}</h3>
+          <h3><b>Zip: </b>{{ item.postalcode }}</h3>
+          <h3><b>Phone: </b>{{ item.phone }}</h3>
+          <h3><b>Email: </b>{{ item.email }}</h3>
+          <h3><b>Volunteers Needed: </b>{{ item.people_needed }}</h3>
+          <h3><b>Phone: </b>{{ item.phone }}</h3>
+          <h3>{{ item.description }}</h3>
+          {% endfor %}
+          <hr style="border-top: 1px solid white">
+          <h1 style="text-align: center">Volunteer Information</h1>
+          {% for item in volunteerdata %}
+          <h5><b>Name: </b>{{ item.first_name }} {{ item.last_name }} <b>Phone: </b> {{ item.phone }} <b>Email:  </b>{{ item.email }}<b> People: </b>{{ item.volunteers }}</h5>
+          {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}
