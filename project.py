@@ -117,7 +117,6 @@ class RequestFormHandler(TemplateHandler):
         params = {
             'address': address1,
             'key': 'AIzaSyDICJB-ecPiyM2GtrlleYblXt318jz71So'
-
         }
 
         # Do the request and get the response data
@@ -148,21 +147,17 @@ class RequestFormHandler(TemplateHandler):
             description = description,
             people_needed = people,
             truck_needed = truck
-
         )
 
         # Get details for the request so it can be displayed on the status page
         req_id = row
         requestdata, volunteerdata = get_status_info(req_id)
-        print(str(requestdata))
-        print(str(volunteerdata))
 
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
 
         template = ENV.get_template('status.html')
         self.write(template.render({'requestdata': requestdata, 'volunteerdata': volunteerdata}))
-
 
 
 class VolunteerFormHandler(TemplateHandler):
@@ -197,8 +192,20 @@ class VolunteerFormHandler(TemplateHandler):
         # Get details for the request so it can be displayed on the status page
         req_id = form_request_id
         requestdata, volunteerdata = get_status_info(req_id)
-        print(str(requestdata))
-        print(str(volunteerdata))
+
+        self.set_header('Cache-Control',
+         'no-store, no-cache, must-revalidate, max-age=0')
+
+        template = ENV.get_template('status.html')
+        self.write(template.render({'requestdata': requestdata, 'volunteerdata': volunteerdata}))
+
+
+class StatusFormHandler(TemplateHandler):
+    def get(self):
+
+        # Get details for the request so it can be displayed on the status page
+        req_id = self.get_body_argument('id')
+        requestdata, volunteerdata = get_status_info(req_id)
 
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
@@ -213,6 +220,7 @@ def make_app():
     (r"/", MainHandler),
     (r"/request_form", RequestFormHandler),
     (r"/volunteer_form", VolunteerFormHandler),
+    (r"/status", StatusFormHandler),
     (r"/rstatus", RequestFormHandler),
     (r"/vstatus", VolunteerFormHandler),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': 'static'}),
