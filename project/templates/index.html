@@ -95,12 +95,7 @@
       function iconImage() {
         if (markers.volunteers == 0){
 
-          markers.content = '<h6>No volunteers needed at the moment!</h6>' +
-          '<form class="form" action ="/status" method ="post" style=color: black>' +
-          '<input type="hidden" name="id" value="{{ item.id }}"/>' +
-          '<button type="submit" class="btn btn-primary btn-sm btn-block">Status</button>' +
-          '</form>' +
-          '<br />'
+          markers.content = '<h6>No volunteers needed at the moment!</h6>'
           return 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
 
         }
