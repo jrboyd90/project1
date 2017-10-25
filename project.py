@@ -15,20 +15,41 @@ ENV = Environment(
     autoescape=select_autoescape(['html', 'xml'])
 )
 
-# Home Page Handler
+
+# Retrieve all details for a specific request
+def get_status_info(req_id):
+    # get details for the request
+    requestdata = []
+    for requestinfo in Request.select().where(Request.id == req_id).dicts():
+        people_needed = requestinfo['people_needed']
+
+    # get details for all of the volunteeers
+    volunteerdata = []
+    for assignmentinfo in Assignment.select().where(Assignment.request_id == req_id).dicts():
+        vol_id = assignmentinfo['volunteer']
+        volunteers_assigned = 0
+        for volunteerinfo in Volunteer.select().where(Volunteer.id == vol_id).order_by(Volunteer.id).dicts():
+            volunteers_assigned = volunteerinfo['volunteers']
+            people_needed = people_needed - volunteers_assigned
+            volunteerdata.append(volunteerinfo)
+
+    # update request info with number of people needed after processing all of the volunteers
+    if people_needed < 0:
+        people_needed = 0
+    else:
+        pass
+    requestinfo['people_needed'] = people_needed
+    requestdata.append(requestinfo)
+    return requestdata, volunteerdata
+
 
 class TemplateHandler(tornado.web.RequestHandler):
   def render_template (self, tpl, context):
     template = ENV.get_template(tpl)
     self.write(template.render(**context))
 
-# def retrieve_api_data():
 
-
-
-
-
-
+# Home Page Handler
 class MainHandler(TemplateHandler):
     def get (self):
         mapdata = []
@@ -62,13 +83,10 @@ class MainHandler(TemplateHandler):
             # load the array with data from each row in the Request table for use in the UI
             mapdata.append(helprequest)
 
-        print(str(mapdata))
         self.set_header('Cache-Control',
         'no-store, no-cache, must-revalidate, max-age=0')
         template = ENV.get_template('index.html')
         self.write(template.render({'mapdata':mapdata}))
-
-        # self.render_template("index.html", {})
 
 
 class RequestFormHandler(TemplateHandler):
@@ -94,10 +112,6 @@ class RequestFormHandler(TemplateHandler):
 
         address1 = (address + ', ' + city + ', ' + state)
 
-
-
-
-
         GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
 
         params = {
@@ -105,7 +119,6 @@ class RequestFormHandler(TemplateHandler):
             'key': 'AIzaSyDICJB-ecPiyM2GtrlleYblXt318jz71So'
 
         }
-
 
         # Do the request and get the response data
         req = requests.get(GOOGLE_MAPS_API_URL, params=params)
@@ -120,8 +133,6 @@ class RequestFormHandler(TemplateHandler):
         geodata['address'] = result['formatted_address']
         lat = result['geometry']['location']['lat']
         lng = result['geometry']['location']['lng']
-
-        print('{address}. (lat, lng) = ({lat}, {lng})'.format(**geodata))
 
         row = Request.create(
             first_name = first_name,
@@ -140,9 +151,16 @@ class RequestFormHandler(TemplateHandler):
 
         )
 
+        # Get details for the request so it can be displayed on the status page
+        req_id = row
+        requestdata, volunteerdata = get_status_info(req_id)
+        print(str(requestdata))
+        print(str(volunteerdata))
+
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("request_form.html", {})
+        self.render_template("status.html", {})
+
 
 class VolunteerFormHandler(TemplateHandler):
     def get(self):
@@ -172,9 +190,16 @@ class VolunteerFormHandler(TemplateHandler):
             volunteer = v,
             request = form_request_id
         )
+
+        # Get details for the request so it can be displayed on the status page
+        req_id = form_request_id
+        requestdata, volunteerdata = get_status_info(req_id)
+        print(str(requestdata))
+        print(str(volunteerdata))
+
         self.set_header('Cache-Control',
          'no-store, no-cache, must-revalidate, max-age=0')
-        self.render_template("volunteer_form.html", {})
+        self.render_template("status.html", {})
 
 
 # Make the Web Applicaton using Tornado
