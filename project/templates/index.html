@@ -12,7 +12,7 @@
 </div>
 <script>
 
-var clicked = false;
+  var clicked = false;
   function initMap() {
     var houston = {lat: 29.7604267, lng: -95.3698028};
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -27,8 +27,9 @@ var clicked = false;
             lat: {{ item.latitude }},
             lng: {{ item.longitude }} },
           volunteers: {{ item.people_needed }},
-          content1: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>',
-          content: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Adress: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>' +
+          content1: '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>',
+          content: '<div style="margin-right: 15px;">' +
+          '<h6>{{ item.description }}</h6><br><p><b>Name: </b> {{ item.first_name }}<br><b>Address: </b> {{ item.address1 }}<br><b>Truck Needed: </b>{{ item.truck_needed }}<br><b>Volunteers Needed: </b>{{ item.people_needed }}</p>' +
           '<form class="form" action ="/volunteer_form" method ="post" style=color: black>' +                           
             '<div class="form-group">' +
               '<label for="first_name">Name:</label>' +
@@ -66,7 +67,8 @@ var clicked = false;
             '</div>' +
           '<input type="hidden" name="id" value="{{ item.id }}"/>' +
           '<button type="submit" class="btn btn-primary btn-lg btn-block">I want to volunteer</button>' +
-          '</form>'
+          '</form>' +
+          '</div>'
       };
 
 
@@ -104,7 +106,7 @@ var clicked = false;
 
           google.maps.event.addListener(marker, 'mouseover', function(){
             if(!clicked) {
-              infoWindow.setContent(markers.content1);
+              infoWindow.setContent(props.content1);
               infoWindow.open(map, marker);
             }
           });
@@ -117,7 +119,7 @@ var clicked = false;
 
           google.maps.event.addListener(marker, 'click', function(){
             clicked = true;
-            infoWindow.setContent(markers.content);
+            infoWindow.setContent(props.content);
             infoWindow.open(map, marker);
           });
           google.maps.event.addListener(infoWindow, 'closeclick', function() {
