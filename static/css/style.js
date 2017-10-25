@@ -27,7 +27,7 @@ basicTimeline
   .add({
     targets: ".progress-bar",
     duration: 2000,
-    width: 300,
+    width: 800,
     easing: "linear"
   })
   .add({
@@ -39,20 +39,24 @@ basicTimeline
     targets: ".progress-bar",
     width: 80,
     height: 80,
-    delay: 500,
+    delay: 0,
     duration: 750,
     borderRadius: 80,
-    backgroundColor: "#71DFBE"
+    backgroundColor: "#71DFBE",
+  })
+  .add({
+    targets: 'svg',
+    zIndex: 10
   })
   .add({
     targets: pathEl,
     strokeDashoffset: [offset, 0],
     duration: 200,
-    easing: "easeInOutSine"
+    easing: "easeInOutSine",
   });
 
 
-$(".button").click(function() {
+function submit_form () {
   var form = $("#form").get(0);
 
   if (form.checkValidity()) {
@@ -65,4 +69,4 @@ $(".button").click(function() {
   'Please re-check your form',
   'error'
 )};
-});
+}
