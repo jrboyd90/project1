@@ -201,7 +201,7 @@ class VolunteerFormHandler(TemplateHandler):
 
 
 class StatusFormHandler(TemplateHandler):
-    def get(self):
+    def post(self):
 
         # Get details for the request so it can be displayed on the status page
         req_id = self.get_body_argument('id')
