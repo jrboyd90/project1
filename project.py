@@ -4,7 +4,6 @@ import tornado.ioloop
 import tornado.web
 import requests
 
-
 from jinja2 import Environment, PackageLoader, select_autoescape
 from models import *
 
